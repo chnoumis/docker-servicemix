@@ -4,6 +4,10 @@ MAINTAINER chnoumis
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
 
+RUN \
+  apt-get update && \
+  apt-get install -y ruby
+
 RUN wget http://apache.openmirror.de/servicemix/servicemix-5/5.3.0/apache-servicemix-5.3.0.zip; \
     unzip -d /opt apache-servicemix-5.3.0.zip; \
     rm -f apache-servicemix-5.3.0.zip; \
@@ -11,8 +15,12 @@ RUN wget http://apache.openmirror.de/servicemix/servicemix-5/5.3.0/apache-servic
     mkdir /deploy; \
     sed -i 's/^\(felix\.fileinstall\.dir\s*=\s*\).*$/\1\/deploy/' /opt/servicemix/etc/org.apache.felix.fileinstall-deploy.cfg
 
+ADD servicemix /opt/servicemix/build
 ADD servicemix/bin/setenv /opt/apache-servicemix-5.3.0/bin/setenv
+ADD servicemix/bin/startup.sh /opt/apache-servicemix-5.3.0/bin/startup.sh
+RUN chmod 777 /opt/apache-servicemix-5.3.0/bin/startup.sh
 
 VOLUME ["/deploy"]
 EXPOSE 1099 8101 8181 61616 44444
-ENTRYPOINT ["/opt/servicemix/bin/servicemix"]
+
+CMD /opt/servicemix/bin/startup.sh
