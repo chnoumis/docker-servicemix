@@ -12,5 +12,5 @@ RUN wget http://apache.openmirror.de/servicemix/servicemix-5/5.3.0/apache-servic
     sed -i 's/^\(felix\.fileinstall\.dir\s*=\s*\).*$/\1\/deploy/' /opt/servicemix/etc/org.apache.felix.fileinstall-deploy.cfg
 
 VOLUME ["/deploy"]
-EXPOSE 1099 8101 8181 61616 44444
+EXPOSE 1099 8101 8181 61616 44444 8778
 ENTRYPOINT ["/opt/servicemix/bin/servicemix"]
