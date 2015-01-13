@@ -64,4 +64,4 @@
 
 export JAVA_MAX_PERM_MEM=256M
 
-export EXTRA_JAVA_OPTS="$(jolokia_opts)"
+# export EXTRA_JAVA_OPTS="$(jolokia_opts)"
