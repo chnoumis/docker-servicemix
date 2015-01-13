@@ -16,9 +16,11 @@ RUN wget http://apache.openmirror.de/servicemix/servicemix-5/5.3.0/apache-servic
     sed -i 's/^\(felix\.fileinstall\.dir\s*=\s*\).*$/\1\/deploy/' /opt/servicemix/etc/org.apache.felix.fileinstall-deploy.cfg
 
 ADD servicemix /opt/servicemix/build
-ADD servicemix/bin/setenv /opt/apache-servicemix-5.3.0/bin/setenv
-ADD servicemix/bin/startup.sh /opt/apache-servicemix-5.3.0/bin/startup.sh
-RUN chmod 777 /opt/apache-servicemix-5.3.0/bin/startup.sh
+
+ADD servicemix/bin/setenv /opt/servicemix/bin/setenv
+ADD servicemix/bin/startup.sh /opt/servicemix/bin/startup.sh
+ADD servicemix/deploy/features.xml /deploy/features.xml
+RUN chmod 777 /opt/servicemix/bin/startup.sh
 
 VOLUME ["/deploy"]
 EXPOSE 1099 8101 8181 61616 44444

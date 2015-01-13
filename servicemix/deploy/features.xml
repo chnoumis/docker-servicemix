@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features>
+
+  <feature name="jolokia">
+    <bundle dependency='true'>mvn:org.jolokia/jolokia-osgi/1.2.3</bundle>
+  </feature>
+
+</features>
